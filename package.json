@@ -1,0 +1,16 @@
+{
+  "name": "MyVideoApp-server",
+  "version": "0.1.0",
+  "description": "Mock server with films",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "errorhandler": "^1.1.1",
+    "express": "~4.15.2",
+    "method-override": "^2.1.2",
+    "mongoose": "~4.9.5",
+    "path": "~0.4.9"
+  }
+}
