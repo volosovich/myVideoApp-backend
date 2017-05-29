@@ -1,6 +1,6 @@
 var file = 'ROOT/server.js';
 
-// Зависимости модулей.
+// Module dependencies
 var application_root = __dirname,
     express = require( 'express' ), //Web framework
     path = require( 'path' ), //Utilities for dealing with file paths
@@ -13,30 +13,30 @@ var application_root = __dirname,
 
 mongoose.Promise = Promise; //Yep, dirty hack fixed mongoose Promise :)
 
-// Создание сервера
+// Create server
 var app = express();
-// Конфигурирование сервера
+// Configure server
 // CORS on ExpressJS
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-//разбор тела запроса и заполнение request.body
+// analysis body and prepare request.body
 // app.use( bodyParser() );
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({ extended: true }) );
-//проверка request.body на переопределение HTTP-методов
+// check request.body for override HTTP-methods
 app.use( methodOverride() );
-//поиск маршрута по URL и HTTP-методу
+// search the route by URL and HTTP-methods
 // app.use( app.router );
-//где сохранить статическое содержимое
+// where the static data are save
 app.use( express.static( path.join( application_root, 'site') ) );
-//показать все ошибки в разработке
+// show all errors during the developing
 app.use( errorHandler({ dumpExceptions: true, showStack: true }));
 
 
-//запуск сервера
+// Start the server
 var port = 4711;
 app.listen( port, function() {
     console.log( 'Express server listening on port %d in %s mode',
@@ -48,10 +48,10 @@ app.get('/api', function(request, responce) {
     responce.send('MyVideoApp Library for API is running');
 });
 
-//Подключаемся к БД
+// Connect to DB
 mongoose.connect('mongodb://localhost/myVideoApp_database');
-//Схемы
-//Для добавления подсхемы в схему используем квадратные скобки
+// Scheme
+// For add subscheme to scheme, use squery brackets
 var Film = new mongoose.Schema({
     id: Number,
     name: String,
@@ -68,15 +68,15 @@ Film.plugin(searchable);
 
 Film.index({'name': 'text'});
 
-//модель. Так как коллекция уже создана, нужно добавить третим параметром её имя
+// The model. Since the collection is already created, need to add collection-name like third option.
 var FilmModel = mongoose.model('Film', Film, 'FILMS');
 
 Film.on('index', function (err) {
   if (err) console.error('CHECK INDEX', err); // error occurred during index creation
 });
 
-//REST API
-//Get all films
+// REST API
+// Get all films
 app.get('/api/films/', function(request, responce) {
     console.log('MyVideoApp ' + file + ' DOMAIN.COM/api/films GET :: Enter');
     return FilmModel.find(function(err, films) {
@@ -89,7 +89,7 @@ app.get('/api/films/', function(request, responce) {
 
 });
 
-//Get array with searched films
+// Get array with searched films
 app.get('/api/films/search', function(request, responce) {
     return FilmModel.search(request.query.q, function (err, data) {
         if (err) {
@@ -100,7 +100,7 @@ app.get('/api/films/search', function(request, responce) {
 
 });
 
-//Get one film by id
+// Get one film by id
 app.get('/api/films/:id', function(request, responce) {
     console.log('MyVideoApp ' + file + ' DOMAIN.COM/api/films GET BY ID :: Enter, ID = >>>>>>>> ' + request.params.id + ' <<<<<<<<');
     return FilmModel.findById(request.params.id, function(err, books) {
