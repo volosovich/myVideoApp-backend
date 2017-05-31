@@ -12,7 +12,7 @@ npm install
 npm start 
 ```
 
-REMEMBER. You need to preinstall mongodb to your local computer or server. Create db, collection and fill mock data from mock.json to collection. I used mongobuster app for Mac. Or you can create your own data using scheme in server.js
+REMEMBER! You need to preinstall mongodb to your local computer or server. Create db, collection and fill mock data from mock.json to collection. I used mongobuster app for Mac. Or you can create your own data using scheme in server.js
 
 ### Make your changes in server.js
 
@@ -49,4 +49,4 @@ Yep, I can made a mistakes in code or this file and so on. So, if you would have
 
 ## License
 
-(MIT.)
+(MIT)
