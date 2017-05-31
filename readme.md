@@ -4,12 +4,17 @@
 
 Backend server for angular test app - MyVideoApp.
 
+## Frontend
+
+You can use some test frontend.
+[Angular](https://github.com/volosovich/myVideoApp-Angular-frontend.git)
+
 ## Installation
 
 For installing all dependencies run commands below:
 
 ```
-git clone https://github.com/TODO  
+git clone https://github.com/volosovich/myVideoApp-backend.git
 npm install   
 npm start 
 ```
